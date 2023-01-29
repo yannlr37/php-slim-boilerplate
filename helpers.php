@@ -13,12 +13,12 @@ $twig = new \Twig\Environment($loader, [
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 if (!function_exists('view')) {
-    /**
-     * @param string $template
-     * @param array $data
-     */
-    function view($template, array $data): string
+
+    function view(string $template, array $data): string
     {
         global $twig;
 
@@ -26,3 +26,12 @@ if (!function_exists('view')) {
         return $template->render($data);
     }
 }
+
+if (!function_exists('env')) {
+
+    function env(string $key, string $defaultValue = ''): string
+    {
+        return $_ENV[$key] ?? $defaultValue;
+    }
+}
+

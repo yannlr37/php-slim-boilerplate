@@ -30,7 +30,8 @@ class Controller extends AbstractController
     {
         $message = $this->greetingService->greet($name);
         return $this->render($response, 'index', [
-            'message' => $message
+            'message' => $message,
+            'prout' => env('PROJECT_NAME', 'COUCOU')
         ]);
     }
 }

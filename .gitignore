@@ -1,4 +1,6 @@
 .idea/
+.env
+vendor/
 cache/twig/*
 !cache/twig/.gitkeep
-vendor/
+
