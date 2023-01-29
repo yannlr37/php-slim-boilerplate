@@ -1,0 +1,24 @@
+{
+    "name": "sheepdev/test",
+    "autoload": {
+        "psr-4": {
+            "Sheepdev\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yannlr37",
+            "email": "yannlarosa@gmail.com"
+        }
+    ],
+    "require": {
+        "php-di/php-di": "^6.3",
+        "twig/twig": "^2.0",
+        "php-di/slim-bridge": "^3.3",
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.6"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.4"
+    }
+}
