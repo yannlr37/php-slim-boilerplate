@@ -3,16 +3,19 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateFilmTable extends AbstractMigration
+final class CreateUsersTable extends AbstractMigration
 {
-    const TABLE = 'films';
+    const TABLE = 'users';
 
     public function up(): void
     {
         if (!$this->hasTable(self::TABLE)) {
             $table = $this->table(self::TABLE);
-            $table->addColumn('name', 'string');
-            $table->addColumn('year', 'integer');
+            $table->addColumn('firstname', 'string', ['length' => 100]);
+            $table->addColumn('lastname', 'string', ['length' => 100]);
+            $table->addColumn('email', 'string');
+            $table->addColumn('password', 'string');
+            $table->addTimestamps();
             $table->create();
         }
     }

@@ -4,15 +4,15 @@ namespace Sheepdev\Repository;
 
 use Sheepdev\DBAL\AbstractRepository;
 use Sheepdev\Logger\AppLogger;
-use Sheepdev\Normalizer\FilmNormalizer;
+use Sheepdev\Normalizer\ArticleNormalizer;
 
-class FilmRepository extends AbstractRepository
+class ArticleRepository extends AbstractRepository
 {
-    public const TABLE = 'films';
+    public const TABLE = 'article';
 
     public function __construct(
-      FilmNormalizer $normalizer,
-      AppLogger $logger
+        ArticleNormalizer $normalizer,
+        AppLogger $logger
     ) {
         parent::__construct($normalizer, $logger);
     }
