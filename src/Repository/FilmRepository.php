@@ -8,6 +8,8 @@ use Sheepdev\Normalizer\FilmNormalizer;
 
 class FilmRepository extends AbstractRepository
 {
+    public const TABLE = 'films';
+
     public function __construct(
       FilmNormalizer $normalizer,
       AppLogger $logger

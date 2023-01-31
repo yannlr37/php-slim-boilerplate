@@ -1,19 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yann
- * Date: 2023-01-29
- * Time: 19:31
- */
 
-$loader = new \Twig\Loader\FilesystemLoader('resources/views');
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../resources/views');
 $twig = new \Twig\Environment($loader, [
-    'cache' => 'cache/twig',
+    'cache' => __DIR__ . '/../cache/twig',
     'debug' => true
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 if (!function_exists('view')) {
@@ -39,8 +33,7 @@ if (!function_exists('config')) {
 
     function config(string $key)
     {
-        $configuration = require_once 'config.php';
+        $configuration = require_once __DIR__ . '/settings.php';
         return $configuration[$key] ?? '';
     }
 }
-

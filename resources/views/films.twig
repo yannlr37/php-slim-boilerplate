@@ -1,3 +1,7 @@
 <h1>Films</h1>
 
-{{ dump(films) }}
+<ul>
+{% for film in films %}
+    <li>{{ film.name }} - {{ film.year }}</li>
+{% endfor %}
+</ul>
