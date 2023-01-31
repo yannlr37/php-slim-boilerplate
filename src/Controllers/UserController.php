@@ -17,7 +17,6 @@ class UserController extends AbstractController
     public function index(Response $response)
     {
         $users = $this->repository->getAll();
-        dd($users);
         return $this->render($response, 'test', [
             'users' => $users
         ]);
