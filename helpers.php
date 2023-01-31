@@ -35,3 +35,12 @@ if (!function_exists('env')) {
     }
 }
 
+if (!function_exists('config')) {
+
+    function config(string $key)
+    {
+        $configuration = require_once 'config.php';
+        return $configuration[$key] ?? '';
+    }
+}
+

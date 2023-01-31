@@ -12,10 +12,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 abstract class AbstractController
 {
-    public function __construct()
-    {
-    }
-
     protected function render(Response $response, $template, array $data = [])
     {
         $html = view($template, $data);

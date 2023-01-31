@@ -3,3 +3,5 @@
 vendor/
 cache/twig/*
 !cache/twig/.gitkeep
+logs/*
+!logs/.gitkeep
