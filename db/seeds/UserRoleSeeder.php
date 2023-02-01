@@ -8,7 +8,6 @@ class UserRoleSeeder extends AbstractSeed
 
     public function run(): void
     {
-
         $roles = [
             ['label' => 'author'],
             ['label' => 'reviewer'],
