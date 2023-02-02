@@ -31,9 +31,12 @@ if (!function_exists('env')) {
 
 if (!function_exists('config')) {
 
-    function config(string $key)
+    function config(string $key = '')
     {
-        $configuration = require_once __DIR__ . '/settings.php';
+        $configuration = require __DIR__ . '/settings.php';
+        if ($key === '') {
+            return $configuration;
+        }
         return $configuration[$key] ?? '';
     }
 }

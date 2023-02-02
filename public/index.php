@@ -2,11 +2,11 @@
 
 use DI\Bridge\Slim\Bridge;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../config/helpers.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 $builder = new DI\ContainerBuilder();
-$builder->addDefinitions(__DIR__ . '/../config/definitions.php');
+$builder->useAutowiring(true);
+//$builder->addDefinitions(__DIR__ . '/../config/definitions.php');
 
 $container = $builder->build();
 

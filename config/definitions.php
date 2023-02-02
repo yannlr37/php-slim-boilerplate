@@ -7,33 +7,42 @@
  */
 
 use Psr\Container\ContainerInterface;
-use Sheepdev\Controllers\FilmController;
-use Sheepdev\Controllers\GreetController;
+use Sheepdev\Actions\Users\AddUser\AddUserAction;
+use Sheepdev\Auth\PasswordCryptService;
+use Sheepdev\Command\AddUserCommand;
+use Sheepdev\Controllers\UserController;
 use Sheepdev\Logger\AppLogger;
-use Sheepdev\Normalizer\FilmNormalizer;
-use Sheepdev\Repository\FilmRepository;
-use Sheepdev\Services\GreetingService;
+use Sheepdev\Normalizer\UserNormalizer;
+use Sheepdev\Repository\UserRepository;
+
+;
 
 return [
     'AppLogger' => function(ContainerInterface $c) {
         return new AppLogger();
     },
-    'GreetingService' => function(ContainerInterface $c) {
-        return new GreetingService();
+    'PasswordCryptService' => function(ContainerInterface $c) {
+        return new PasswordCryptService();
     },
-    'GreetController' => function (ContainerInterface $c) {
-        return new GreetController($c->get('GreetingService'));
+    'UserNormalizer' => function(ContainerInterface $c) {
+        return new UserNormalizer();
     },
-    'FilmNormalizer' => function(ContainerInterface $c) {
-        return new FilmNormalizer();
-    },
-    'FilmRepository' => function(ContainerInterface $c) {
-        return new FilmRepository(
-            $c->get('FilmNormalizer'),
+    'UserRepository' => function(ContainerInterface $c) {
+        return new UserRepository(
+            $c->get('UserNormalizer'),
             $c->get('AppLogger')
         );
     },
-    'FilmController' => function (ContainerInterface $c) {
-        return new FilmController($c->get('FilmRepository'));
-    }
+    'UserController' => function (ContainerInterface $c) {
+        return new UserController($c->get('UserRepository'));
+    },
+    'AddUserAction' => function(ContainerInterface $c) {
+        return new AddUserAction(
+            $c->get('UserRepository'),
+            $c->get('PasswordCryptService')
+        );
+    },
+    'AddUserCommand' => function(ContainerInterface $c) {
+        return new AddUserCommand($c->get('UserRepository'));
+    },
 ];

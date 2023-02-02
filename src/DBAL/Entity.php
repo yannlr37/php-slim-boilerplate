@@ -24,13 +24,14 @@ abstract class Entity
 
         $class = new ReflectionClass(get_class($this));
         $fields = array_column($class->getProperties(), 'name');
-
         foreach ($fields as $field) {
             $getter = 'get' . ucwords(str_replace('_', ' ', $field));
             $getter = str_replace(' ', '', $getter);
 
             if ($this->$getter() instanceof \DateTime) {
                 $output[$field] = $this->$getter()->format(config('default_datetime_format'));
+            } elseif ('array' == gettype($this->$getter())) {
+                $output[$field] = implode(',', $this->$getter());
             } else {
                 $output[$field] = $this->$getter();
             }

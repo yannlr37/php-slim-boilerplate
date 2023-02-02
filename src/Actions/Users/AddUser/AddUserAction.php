@@ -48,6 +48,8 @@ class AddUserAction
         $user->setEmail($input->email);
         $user->setPassword($this->cryptService->encryptPassword($input->password));
         $user->setRolesArray($input->roles);
+        $user->setCreatedAt(new \DateTime());
+        $user->setUpdatedAt(new \DateTime());
 
         if (!$this->repository->add($user)) {
             $response->success = false;
