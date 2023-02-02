@@ -1,2 +1,0 @@
-[2023-01-31T16:20:47.211094+01:00] .ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'boilerplate.users' doesn't exist [] []
-[2023-01-31T16:21:26.860616+01:00] .ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'boilerplate.users' doesn't exist [] []

@@ -1,3 +1,5 @@
+![SheedDev CMS](public/images/sheepdev_cms.png)
+
 # PHP 7.4 Slim 4 Boilerplate
 
 Everything is installed and configure to start a simple Web project using PHP 7.4 :

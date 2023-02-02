@@ -13,7 +13,10 @@ class AppLogger implements LoggerInterface
 
     public function __construct()
     {
-        $handler = new RotatingFileHandler(config('log_filename'), (int) config('log_max_days'));
+        $handler = new RotatingFileHandler(
+            getRootDir() . '/' . config('log_filename'),
+            (int) config('log_max_days')
+        );
         $this->monolog = new Logger(config('log_channel'));
         $this->monolog->pushHandler($handler);
     }

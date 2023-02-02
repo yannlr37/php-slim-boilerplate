@@ -40,3 +40,11 @@ if (!function_exists('config')) {
         return $configuration[$key] ?? '';
     }
 }
+
+if (!function_exists('getRootDir')) {
+
+    function getRootDir()
+    {
+        return __DIR__ . '/../';
+    }
+}
