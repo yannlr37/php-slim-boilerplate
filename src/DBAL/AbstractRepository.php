@@ -40,6 +40,22 @@ abstract class AbstractRepository
         return $items;
     }
 
+    public function getById(int $id): ?Entity
+    {
+        $entity = null;
+        try {
+            $query = sprintf("SELECT * FROM %s WHERE id = %d", static::TABLE, $id);
+            $object = $this->fetchOne($query);
+            if (empty($object)) {
+                return null;
+            }
+            $entity = $this->normalizer->denormalize($object);
+        } catch (\PDOException $e) {
+            $this->logger->error($e->getMessage());
+        }
+        return $entity;
+    }
+
     public function save(Entity $entity): bool
     {
         if (is_null($entity->getId())) {
@@ -71,6 +87,19 @@ abstract class AbstractRepository
         } catch (\PDOException $e) {
             $context = [];
             $this->logger->error('[Update] ' . $e->getMessage(), $context);
+            return false;
+        }
+    }
+
+    public function delete(int $entityId): bool
+    {
+        try {
+            $query = sprintf("DELETE FROM %s WHERE id = %d", static::TABLE, $entityId);
+            $stmt = $this->db->pdo->prepare($query);
+            return $stmt->execute();
+        } catch (\PDOException $e) {
+            $context = [];
+            $this->logger->error('[Delete] ' . $e->getMessage(), $context);
             return false;
         }
     }
@@ -112,5 +141,16 @@ abstract class AbstractRepository
         $stmt = $this->db->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    private function fetchOne(string $query): array
+    {
+        $stmt = $this->db->pdo->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$data) {
+            return [];
+        }
+        return $data;
     }
 }

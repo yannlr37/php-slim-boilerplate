@@ -33,7 +33,7 @@ class AddUserCommand extends Command
             ->addOption('roles', 'r', InputOption::VALUE_OPTIONAL);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('firstname') == '') {
             $output->writeln('<error>Firstname must not be empty</error>');
