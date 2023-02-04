@@ -1,18 +1,106 @@
-<h1>Login Page</h1>
-<div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SheepDev CMS</title>
+    <style>
+        body {
+            background-color: grey;
+            margin: 0;
+            padding: 0;
+        }
+        #logo {
+            position: absolute;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+        #logo img {
+            width: 300px;
+        }
+        #login-panel {
+            background-color: #F5F5F5;
+            border: 1px solid black;
+            box-shadow: 5px 5px 12px rgba(0,0,0,0.3);
+            padding: 15px;
+            position: absolute;
+            margin-left: 50%;
+            margin-top: 40vh;
+            transform: translateX(-50%);
+            width: 400px;
+        }
+        .form-row {
+            display: flex;
+            padding-bottom: 10px;
+        }
+        .form-row label {
+            font-weight: bold;
+            width: 30%;
+        }
+        .form-row input {
+            width: 70%;
+        }
+        .form-submit {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 125px;
+            box-shadow: inset 0 13px 25px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.5);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 0rem 1rem;
+            padding: 0.2rem 2rem;
+            position: relative;
+            transition: all ease .3s;
+            background: linear-gradient(#888, #ddd, #fff);
+            color: #0f0f0f;
+        }
+
+        button:before {
+            background: linear-gradient(rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+            border-radius: 125px;
+            content:'';
+            height: 12px;
+            left: 4%;
+            position: absolute;
+            top: 1px;
+            transition: all ease .3s;
+            width: 92%;
+        }
+
+        button:hover {
+            background: linear-gradient(#0648b1, #1491de, #d6f5fe);
+        }
+    </style>
+</head>
+<body>
+
+<div id="logo">
+    <img src="/images/sheepdev_cms.png" alt="Logo">
+</div>
+
+<div id="login-panel">
     <form action="/authenticate" method="POST">
-        <div>
+        <div class="form-row">
             <label for="email">Email</label>
             <input type="email" name="email" id="email">
         </div>
 
-        <div>
-            <label for="password">Password</label>
+        <div class="form-row">
+            <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password">
         </div>
 
-        <div>
-            <button type="submit">Envoyer</button>
+        <div class="form-row form-submit">
+            <button type="submit">Je me connecte</button>
         </div>
     </form>
 </div>
+
+</body>
+</html>
