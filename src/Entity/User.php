@@ -17,6 +17,8 @@ class User extends Entity
     /** @var string */
     private $password;
     /** @var string */
+    private $sessionToken;
+    /** @var string */
     private $roles;
     /** @var DateTime */
     private $created_at;
@@ -130,5 +132,15 @@ class User extends Entity
             return trim($item);
         });
         return $roles;
+    }
+
+    public function getSessionToken(): string
+    {
+        return $this->sessionToken;
+    }
+
+    public function setSessionToken(string $sessionToken): void
+    {
+        $this->sessionToken = $sessionToken;
     }
 }

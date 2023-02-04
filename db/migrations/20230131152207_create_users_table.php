@@ -15,6 +15,7 @@ final class CreateUsersTable extends AbstractMigration
             $table->addColumn('lastname', 'string', ['length' => 100]);
             $table->addColumn('email', 'string');
             $table->addColumn('password', 'string');
+            $table->addColumn('sessionToken', 'string');
             $table->addColumn('roles', 'string');
             $table->addTimestamps();
             $table->create();

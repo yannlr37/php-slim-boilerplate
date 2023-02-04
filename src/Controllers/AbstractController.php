@@ -9,6 +9,9 @@
 namespace Sheepdev\Controllers;
 
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use \Fig\Http\Message\StatusCodeInterface;
+use Slim\Routing\RouteContext;
 
 abstract class AbstractController
 {
@@ -19,5 +22,18 @@ abstract class AbstractController
         $response->getBody()->write($html);
 
         return $response;
+    }
+
+    public function redirect(
+        Response $response,
+        Request $request,
+        string $routeName,
+        int $status = StatusCodeInterface::STATUS_FOUND): Response
+    {
+        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+        $url = $routeParser->urlFor($routeName);
+
+        return $response->withHeader('Location', $url)
+            ->withStatus($status);
     }
 }

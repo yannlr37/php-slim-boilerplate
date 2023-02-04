@@ -59,6 +59,27 @@ abstract class AbstractRepository
         return $entity;
     }
 
+    public function getOneBy(string $field, $value): ?Entity
+    {
+        $entity = null;
+        try {
+            $query = sprintf(
+                "SELECT * FROM %s WHERE %s = %s",
+                static::TABLE,
+                $field,
+                (string) $value
+            );
+            $object = $this->fetchOne($query);
+            if (empty($object)) {
+                return null;
+            }
+            $entity = $this->normalizer->denormalize($object);
+        } catch (\PDOException $e) {
+            $this->logger->error($e->getMessage());
+        }
+        return $entity;
+    }
+
     public function save(Entity $entity): bool
     {
         if (is_null($entity->getId())) {
@@ -155,5 +176,18 @@ abstract class AbstractRepository
             return [];
         }
         return $data;
+    }
+
+    protected function execute(string $query)
+    {
+        try {
+            $stmt = $this->db->pdo->prepare($query);
+            $stmt->execute();
+            return true;
+        } catch (\Throwable $e) {
+            $context = ['query' => $query];
+            $this->logger->error('[Execute] ' . $e->getMessage(), $context);
+            return false;
+        }
     }
 }

@@ -17,4 +17,23 @@ class UserRepository extends AbstractRepository
         parent::__construct($normalizer, $logger);
     }
 
+    public function setSessionToken(int $userId, string $userSessionToken): void
+    {
+        $query = sprintf(
+            "UPDATE sessionToken FROM %s WHERE id = %d",
+            $userSessionToken,
+            $userId
+        );
+        $this->execute($query);
+    }
+
+    /**
+     * @param $userId
+     * @param $userSessionToken
+     */
+    public function getUserBySessionToken(string $userSessionToken)
+    {
+        return $this->getOneBy('sessionToken', $userSessionToken);
+    }
+
 }
