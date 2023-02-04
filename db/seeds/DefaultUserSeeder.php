@@ -18,7 +18,7 @@ class DefaultUserSeeder extends AbstractSeed
                 'lastname' => 'DOE',
                 'email' => 'john.doe@example.com',
                 'password' => $passwordCryptService->encryptPassword('admin'),
-                'sessionToken' => uniqid(),
+                'sessionToken' => '',
                 'roles' => 'author,reviewer,publisher'
             ]
         ];

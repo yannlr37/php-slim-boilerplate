@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SheepDev CMS</title>
+    </head>
+    <body>
+        <header>
+            {% if (auth.authenticated()) %}
+                <p>Bonjour {{ auth.firstname() }} {{ auth.lastname() }}</p>
+            {% endif %}
+
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

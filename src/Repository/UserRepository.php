@@ -20,7 +20,8 @@ class UserRepository extends AbstractRepository
     public function setSessionToken(int $userId, string $userSessionToken): void
     {
         $query = sprintf(
-            "UPDATE sessionToken FROM %s WHERE id = %d",
+            "UPDATE %s SET sessionToken = '%s' WHERE id = %d",
+            self::TABLE,
             $userSessionToken,
             $userId
         );
@@ -33,7 +34,15 @@ class UserRepository extends AbstractRepository
      */
     public function getUserBySessionToken(string $userSessionToken)
     {
-        return $this->getOneBy('sessionToken', $userSessionToken);
+        return $this->getOneBy(['sessionToken' => $userSessionToken]);
+    }
+
+    public function getUserByEmailAndPassword(string $email, string $password)
+    {
+        return $this->getOneBy([
+            'email' => $email,
+            'password' => $password
+        ]);
     }
 
 }

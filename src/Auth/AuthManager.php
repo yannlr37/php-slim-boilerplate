@@ -28,17 +28,17 @@ class AuthManager
     public function isUserAuthenticated(): bool
     {
         // get cookie on user's PC
-        $usersessionToken = $_COOKIE[self::COOKIE_USER_KEY] ?? null;
+        $userSessionToken = $_COOKIE[self::COOKIE_USER_KEY] ?? null;
 
         // if not exist, user must authenticate
-        if (is_null($usersessionToken)) {
+        if (is_null($userSessionToken)) {
             return false;
         }
 
         // check if cookie session token equals the one from DB
         // if not : cookie should have expired, user must log in again
-        $currentUser = $this->getCurrentLoginInUser();
-        if (is_null($currentUser)) {
+        $currentUser = $this->getCurrentLoggedInUser();
+        if (empty($currentUser)) {
             unset($_COOKIE[self::COOKIE_USER_KEY]);
             return false;
         }
@@ -46,20 +46,45 @@ class AuthManager
         return true;
     }
 
-    /**
-     * @return User|null
-     */
-    public function getCurrentLoginInUser()
+    public function getCurrentLoggedInUser(): array
     {
-        return $this->userRepository->getUserBySessionToken($_COOKIE[self::COOKIE_USER_KEY]);
+        $key = $_COOKIE[self::COOKIE_USER_KEY];
+        if (!isset($_SESSION[$key])) {
+            return [];
+        }
+        return json_decode($_SESSION[$key], true);
     }
 
-    public function storeUserAuthentication(int $userId)
+    public function deleteCookie(): void
+    {
+        unset($_COOKIE[self::COOKIE_USER_KEY]);
+    }
+
+    public function storeUserAuthenticationToken(User $user)
     {
         $userSessionToken = uniqid();
-        $this->userRepository->setSessionToken($userId, $userSessionToken);
+        $this->userRepository->setSessionToken($user->getId(), $userSessionToken);
         setcookie(self::COOKIE_USER_KEY, $userSessionToken, time() + 86400);
+        $user->setSessionToken($userSessionToken);
+        $_SESSION[$userSessionToken] = json_encode($user->getFields());
     }
 
+    public function authenticated(): bool
+    {
+        $user = $this->getCurrentLoggedInUser();
+        return !empty($user);
+    }
+
+    public function firstname(): string
+    {
+        $user = $this->getCurrentLoggedInUser();
+        return $user['firstname'];
+    }
+
+    public function lastname(): string
+    {
+        $user = $this->getCurrentLoggedInUser();
+        return strtoupper($user['lastname']);
+    }
 
 }

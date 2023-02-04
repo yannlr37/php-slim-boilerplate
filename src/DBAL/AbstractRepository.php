@@ -59,15 +59,18 @@ abstract class AbstractRepository
         return $entity;
     }
 
-    public function getOneBy(string $field, $value): ?Entity
+    public function getOneBy(array $constraints): ?Entity
     {
         $entity = null;
+        $where = [];
+        foreach ($constraints as $field => $value) {
+            $where[] = sprintf(" %s = '%s' ", $field, (string) $value);
+        }
         try {
             $query = sprintf(
-                "SELECT * FROM %s WHERE %s = %s",
+                "SELECT * FROM %s WHERE %s",
                 static::TABLE,
-                $field,
-                (string) $value
+                implode('AND', $where)
             );
             $object = $this->fetchOne($query);
             if (empty($object)) {

@@ -1,6 +1,13 @@
 <?php
 
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use \Fig\Http\Message\StatusCodeInterface;
+use Sheepdev\Auth\AuthManager;
+use Slim\Routing\RouteContext;
+
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../resources/views');
+global $twig;
 $twig = new \Twig\Environment($loader, [
     'cache' => __DIR__ . '/../cache/twig',
     'debug' => true
@@ -15,6 +22,12 @@ if (!function_exists('view')) {
     function view(string $template, array $data): string
     {
         global $twig;
+        $twig->addGlobal('auth', new AuthManager(
+            new \Sheepdev\Repository\UserRepository(
+                new \Sheepdev\Normalizer\UserNormalizer(),
+                new \Sheepdev\Logger\AppLogger()
+            )
+        ));
 
         $template = $twig->load($template . '.twig');
         return $template->render($data);
@@ -46,5 +59,18 @@ if (!function_exists('getRootDir')) {
     function getRootDir()
     {
         return __DIR__ . '/../';
+    }
+}
+
+if (!function_exists('redirect')) {
+
+    function redirect(
+        Response $response,
+        Request $request,
+        string $routeName
+    ) {
+        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+        $url = $routeParser->urlFor($routeName);
+        header('Location: ' . $url);
     }
 }

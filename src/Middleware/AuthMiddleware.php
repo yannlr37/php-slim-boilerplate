@@ -29,16 +29,9 @@ class AuthMiddleware
     {
         if (!$this->authManager->isUserAuthenticated()) {
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-            $url = $routeParser->urlFor('login');
+            $url = $routeParser->urlFor('login.signin');
             header('Location: ' . $url);
         }
-
-        $user = $this->authManager->getCurrentLoginInUser();
-        if (is_null($user)) {
-            header('Location: ' . $url);
-        }
-
-        // store user in session ?
 
         return $handler->handle($request);
     }
