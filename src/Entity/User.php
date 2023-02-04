@@ -8,13 +8,20 @@ use Sheepdev\DBAL\Entity;
 
 class User extends Entity
 {
-    private string $firstname;
-    private string $lastname;
-    private string $email;
-    private string $password;
-    private string $roles;
-    private DateTime $created_at;
-    private DateTime $updated_at;
+    /** @var string */
+    private $firstname;
+    /** @var string */
+    private $lastname;
+    /** @var string */
+    private $email;
+    /** @var string */
+    private $password;
+    /** @var string */
+    private $roles;
+    /** @var DateTime */
+    private $created_at;
+    /** @var DateTime */
+    private $updated_at;
 
     public function getFirstname(): string
     {

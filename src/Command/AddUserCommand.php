@@ -15,7 +15,8 @@ class AddUserCommand extends Command
 
     protected static $defaultDescription = 'Add new user';
 
-    protected AddUserAction $action;
+    /** @var AddUserAction */
+    protected $action;
 
     public function __construct(AddUserAction $action)
     {

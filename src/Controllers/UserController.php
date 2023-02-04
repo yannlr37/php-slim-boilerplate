@@ -7,7 +7,8 @@ use Sheepdev\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
-    private UserRepository $repository;
+    /** @var UserRepository */
+    private $repository;
 
     public function __construct(UserRepository $repository)
     {

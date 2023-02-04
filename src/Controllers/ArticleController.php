@@ -7,7 +7,8 @@ use Sheepdev\Repository\ArticleRepository;
 
 class ArticleController extends AbstractController
 {
-    private ArticleRepository $repository;
+    /** @var ArticleRepository */
+    private $repository;
 
     public function __construct(ArticleRepository $repository)
     {

@@ -4,9 +4,14 @@ namespace Sheepdev\Actions\Users\AddUser;
 
 class AddUserRequest
 {
-    public string $firstname = '';
-    public string $lastname = '';
-    public string $email = '';
-    public string $password = '';
-    public array $roles = [];
+    /** @var string */
+    public $firstname = '';
+    /** @var string */
+    public $lastname = '';
+    /** @var string */
+    public $email = '';
+    /** @var string */
+    public $password = '';
+    /** @var array */
+    public $roles = [];
 }

@@ -10,9 +10,12 @@ abstract class AbstractRepository
 {
     public const TABLE = '';
 
-    private DBConnection $db;
-    protected AbstractNormalizer $normalizer;
-    protected AppLogger $logger;
+    /** @var DBConnection */
+    private $db;
+    /** @var AbstractNormalizer */
+    protected $normalizer;
+    /** @var AppLogger */
+    protected $logger;
 
     public function __construct(
         AbstractNormalizer $normaliser,

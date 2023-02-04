@@ -15,7 +15,8 @@ class DeleteUserCommand extends Command
 
     protected static $defaultDescription = 'Delete user from database';
 
-    protected DeleteUserAction $action;
+    /** @var DeleteUserAction */
+    protected $action;
 
     public function __construct(DeleteUserAction $action)
     {

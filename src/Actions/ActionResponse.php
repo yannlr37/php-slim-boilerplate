@@ -4,6 +4,8 @@ namespace Sheepdev\Actions;
 
 class ActionResponse
 {
-    public bool $success = true;
-    public array $errors = [];
+    /** @var bool */
+    public $success = true;
+    /** @var array */
+    public $errors = [];
 }

@@ -7,10 +7,16 @@ use Sheepdev\DBAL\Entity;
 
 class Page extends Entity
 {
-    private string $slug;
-    private string $title;
-    private string $content;
-    private int $author;
-    private int $reviewer;
-    private DateTime $date;
+    /** @var string */
+    private $slug;
+    /** @var string */
+    private $title;
+    /** @var string */
+    private $content;
+    /** @var int */
+    private $author;
+    /** @var int */
+    private $reviewer;
+    /** @var DateTime */
+    private $date;
 }

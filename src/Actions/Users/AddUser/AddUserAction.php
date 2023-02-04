@@ -9,8 +9,10 @@ use Sheepdev\Repository\UserRepository;
 
 class AddUserAction
 {
-    private UserRepository $repository;
-    private PasswordCryptService $cryptService;
+    /** @var UserRepository */
+    private $repository;
+    /** @var PasswordCryptService */
+    private $cryptService;
 
     public function __construct(
         UserRepository $repository,

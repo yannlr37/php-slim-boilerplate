@@ -7,7 +7,8 @@ use Sheepdev\Repository\PageRepository;
 
 class PageController extends AbstractController
 {
-    private PageRepository $repository;
+    /** @var PageRepository */
+    private $repository;
 
     public function __construct(PageRepository $repository)
     {

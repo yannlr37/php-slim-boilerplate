@@ -6,7 +6,8 @@ use ReflectionClass;
 
 abstract class Entity
 {
-    private ?int $id;
+    /** @var int|null */
+    private $id;
 
     public function getId(): ?int
     {

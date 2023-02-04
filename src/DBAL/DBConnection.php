@@ -6,13 +6,19 @@ use PDO;
 
 class DBConnection
 {
-    private string $driver = 'mysql';
-    private string $dsn;
-    private string $user;
-    private string $password;
-    public ?PDO $pdo = null;
+    /** @var string */
+    private $driver = 'mysql';
+    /** @var string */
+    private $dsn;
+    /** @var string */
+    private $user;
+    /** @var string */
+    private $password;
+    /** @var PDO|null */
+    public $pdo = null;
 
-    public static ?DBConnection $_instance = null;
+    /** @var DBConnection|null */
+    public static $_instance = null;
 
     public static function getInstance(): DBConnection
     {
